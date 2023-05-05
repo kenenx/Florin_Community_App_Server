@@ -19,7 +19,6 @@ async function show(req, res) {
   }
 }
 
-// create new snack
 async function create(req, res) {
   try {
     const complaintData = req.body
@@ -30,10 +29,32 @@ async function create(req, res) {
   }
 }
 
+async function update(req, res) {
+  try {
+    const id = parseInt(req.params.id)
+    const data = req.body
+    const updateData = await Complaint.getOneById(id)
+    const result = await updateData.update(data)
+    res.status(200).json(result)
+  } catch (err) {
+    res.status(404).json({ error: err.message })
+  }
+}
+async function destroy(req, res) {
+  try {
+    const id = parseInt(req.params.id)
+    const deleteData = await Complaint.getOneById(id)
+    await deleteData.destroy()
+    res.status(204).json()
+  } catch (err) {
+    res.status(404).json({ error: err.message })
+  }
+}
+
 module.exports = {
   index,
   show,
   create,
-  // update,
-  // delete
+  update,
+  destroy,
 }

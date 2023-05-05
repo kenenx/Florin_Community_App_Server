@@ -1,8 +1,36 @@
-DROP TABLE IF EXISTS complaints;
+DROP TABLE IF EXISTS complaints;-
 DROP TABLE IF EXISTS recycling;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS token;
 DROP TABLE IF EXISTS users;
+
+CREATE TABLE complaints (
+    comp_id INT GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR (100) NOT NULL,
+    post_date DATE NOT NULL,
+    content VARCHAR (500) NOT NULL,
+    resolved BOOLEAN default FALSE,
+    PRIMARY KEY (comp_id)
+);
+
+CREATE TABLE events (
+    event_id INT GENERATED ALWAYS AS IDENTITY,
+    event_title VARCHAR (100) NOT NULL,
+    event_type VARCHAR(50) NOT NULL,
+    event_date DATE NOT NULL,
+    event_content VARCHAR (500) NOT NULL,
+    attendance INT dEFAULT 1,
+    PRIMARY KEY (event_id)
+);
+
+CREATE TABLE recycling (
+    recy_id INT GENERATED ALWAYS AS IDENTITY,
+    recy_type VARCHAR (100) NOT NULL,
+    post_date DATE NOT NULL,
+    img VARCHAR(50),
+    info VARCHAR (500) NOT NULL,
+    PRIMARY KEY (recy_id)
+);
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -13,37 +41,9 @@ CREATE TABLE users (
     recy_id INT NOT NULL,
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
-);
-
-CREATE TABLE complaints (
-    comp_id INT GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR (100) NOT NULL,
-    post_date VARCHAR (50) NOT NULL,
-    content VARCHAR (500) NOT NULL,
-    resolved BOOLEAN default FALSE,
-    PRIMARY KEY (comp_id)
-    FOREIGN KEY (comp_id) REFERENCES users("users_id"),
-);
-
-CREATE TABLE recycling (
-    recy_id INT GENERATED ALWAYS AS IDENTITY,
-    recy_type VARCHAR (100) NOT NULL,
-    post_date VARCHAR (50) NOT NULL,
-    img VARCHAR(50),
-    info VARCHAR (500) NOT NULL,
-    PRIMARY KEY (recy_id)
-    FOREIGN KEY (recy_id) REFERENCES users("users_id"),
-);
-
-CREATE TABLE events (
-    event_id INT GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR (100) NOT NULL,
-    event_type VARCHAR(50) NOT NULL,
-    event_date VARCHAR (50) NOT NULL,
-    content VARCHAR (500) NOT NULL,
-    attendance INT dEFAULT 1,
-    PRIMARY KEY (event_id)
-    FOREIGN KEY (event_id) REFERENCES ("event_id")
+    FOREIGN KEY (comp_id) REFERENCES complaints("comp_id"),
+    FOREIGN KEY (recy_id) REFERENCES recycling("recy_id"),
+    FOREIGN KEY (event_id) REFERENCES events("event_id")
 );
 
 CREATE TABLE token (
@@ -54,7 +54,9 @@ CREATE TABLE token (
     FOREIGN KEY (user_id) REFERENCES users("user_id")
 );
 
+
 -- event type 
+
 /* 
     commmunity events:  
         - mentoring
