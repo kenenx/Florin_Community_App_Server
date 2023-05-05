@@ -17,6 +17,7 @@ CREATE TABLE users (
     FOREIGN KEY (recy_id) REFERENCES complaints("recy_id"),
     FOREIGN KEY (event_id) REFERENCES complaints("event_id")
 );
+
 CREATE TABLE complaints (
     comp_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
@@ -29,7 +30,6 @@ CREATE TABLE complaints (
 CREATE TABLE recycling (
     recy_id INT GENERATED ALWAYS AS IDENTITY,
     recy_type VARCHAR (100) NOT NULL,
-    bin_coll VARCHAR (50) NOT NULL,
     post_date VARCHAR (50) NOT NULL,
     img VARCHAR(50),
     info VARCHAR (500) NOT NULL,
@@ -63,5 +63,6 @@ CREATE TABLE token (
         - arts&crafts
         - activities 
         - vol jobs
+        - bin collection
 */
 
