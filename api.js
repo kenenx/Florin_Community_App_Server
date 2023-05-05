@@ -12,4 +12,8 @@ api.use(logger('dev'))
 
 api.use("/users", usersRouter);
 
+
+api.use("/events", eventsRouter)
+
+
 module.exports = api;
