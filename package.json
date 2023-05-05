@@ -1,7 +1,8 @@
 {
-    "scripts": {
+  "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "setup-db": "node ./database/setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
