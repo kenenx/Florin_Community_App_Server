@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS recyling;
+DROP TABLE IF EXISTS complaints;
+DROP TABLE IF EXISTS users;
+
+
