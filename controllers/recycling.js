@@ -11,9 +11,11 @@ async function index (req, res) {
 
 async function update (req, res) {
     try {
-        //const id = parseInt(req.params.id);
+        const id = parseInt(req.params.id);
         const data = req.body;
-        const result = await Recycle.update(data);
+        const updateData = await Recycle.getOneById(id);
+        const result = await updateData.update(data)
+        //const result = await Recycle.update(data);
         res.status(200).json(result);
     } catch (err) {
         res.status(404).json({"error": err.message})

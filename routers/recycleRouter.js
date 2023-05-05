@@ -8,6 +8,7 @@ const recyclingRouter = Router();
 recyclingRouter.get("/",recyclingController.index);
 recyclingRouter.post("/", recyclingController.create);
 recyclingRouter.get("/:id", recyclingController.show);
+recyclingRouter.patch('/:id',recyclingController.update)
 recyclingRouter.delete("/:id", recyclingController.destroy);
 
 module.exports = recyclingRouter;
