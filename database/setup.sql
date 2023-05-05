@@ -13,10 +13,8 @@ CREATE TABLE users (
     recy_id INT NOT NULL,
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
-    FOREIGN KEY (comp_id) REFERENCES complaints("comp_id"),
-    FOREIGN KEY (recy_id) REFERENCES complaints("recy_id"),
-    FOREIGN KEY (event_id) REFERENCES complaints("event_id")
 );
+
 CREATE TABLE complaints (
     comp_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
@@ -24,16 +22,17 @@ CREATE TABLE complaints (
     content VARCHAR (500) NOT NULL,
     resolved BOOLEAN default FALSE,
     PRIMARY KEY (comp_id)
+    FOREIGN KEY (comp_id) REFERENCES users("users_id"),
 );
 
 CREATE TABLE recycling (
     recy_id INT GENERATED ALWAYS AS IDENTITY,
     recy_type VARCHAR (100) NOT NULL,
-    bin_coll VARCHAR (50) NOT NULL,
     post_date VARCHAR (50) NOT NULL,
     img VARCHAR(50),
     info VARCHAR (500) NOT NULL,
     PRIMARY KEY (recy_id)
+    FOREIGN KEY (recy_id) REFERENCES users("users_id"),
 );
 
 CREATE TABLE events (
@@ -44,6 +43,7 @@ CREATE TABLE events (
     content VARCHAR (500) NOT NULL,
     attendance INT dEFAULT 1,
     PRIMARY KEY (event_id)
+    FOREIGN KEY (event_id) REFERENCES ("event_id")
 );
 
 CREATE TABLE token (
@@ -63,5 +63,6 @@ CREATE TABLE token (
         - arts&crafts
         - activities 
         - vol jobs
+        - bin collection
 */
 
