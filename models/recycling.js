@@ -26,8 +26,8 @@ class Recycle {
         return new Recycle(response.rows[0]);
     }
     async update(data) {
-        let { title, info } = data;
-        const response = await db.query("UPDATE recycling SET recy_title = $2, info = $3 WHERE recy_id = $1 RETURNING *;",[this.recy_id, title, info])
+        let { title, info,recy_type, post_date, img } = data;
+        const response = await db.query("UPDATE recycling SET recy_title = $2, info = $3, recy_type = $4, post_date = $5, img =$6 WHERE recy_id = $1 RETURNING *;",[this.recy_id, title, info, recy_type, post_date, img])
         if (response.rows.length != 1) {
             throw new Error("Unable to update item.")
         }
