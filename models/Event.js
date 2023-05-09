@@ -16,7 +16,18 @@ class Event {
         if (response.rows.length === 0) {
             throw new Error("No event available.")
         }
-        return response.rows.map(g => new Snack(g));
+        return response.rows.map(g => new Event(g));
+    }
+
+    static async create(data) {
+        const { event_title,
+            event_type,
+            event_date,
+            event_content} = data   
+        const response = await db.query('INSERT INTO events (event_title, event_type, event_date, event_content) VALUES ($1, $2, $3, $4) RETURNING *;', [event_title, event_type, event_date, event_content]);
+        // const eventId = response.rows[0].event_id;
+        // const newevent = await Event.getOneById(eventId);
+        return new Event(response.rows[0]);
     }
 
     static async getOneById(id) {
@@ -24,37 +35,32 @@ class Event {
         if (response.rows.length != 1) {
             throw new Error("Unable to locate event.")
         }
-        return new Snack(response.rows[0]);
-    }
-
-    static async create(data) {
-        const { event_title,
-            event_type,
-            event_date,
-            event_content,
-            attendance} = data   
-        const response = await db.query('INSERT INTO events (event_title, event_type, event_date, event_content, attendance ) VALUES ($1, $2, $3, $4, $5) RETURNING *;', [event_title, event_type, event_date, event_content, attendance]);
-        // const snackId = response.rows[0].snack_id;
-        // const newSnack = await Snack.getOneById(snackId);
         return new Event(response.rows[0]);
     }
 
-    static async update(id) {
-        const response = await db.query("UPDATE snack SET votes = votes + 1 WHERE snack_id = $1 RETURNING snack_id,snack_name, votes;",
-            [id]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to update votes.")
+
+     async update(data) {
+        let { event_title,
+            event_type,
+            event_date,
+            event_content,
+            attendance} = data
+        const response = await db.query("UPDATE events SET event_title = $2, event_type = $3, event_date = $4, event_content = $5, attendance = $6 WHERE event_id = $1 RETURNING *;",
+        [this.id, event_title, event_type, event_date, event_content, attendance]);
+        if (response.rows.length !== 1) {
+            throw new Error("Unable to update event.")
         }
-        return new Snack(response.rows[0]);
+        const updateData = response.rows[0]
+        return updateData;
     }
 
     static async destroy(id) {
-        const response = await db.query('DELETE FROM snack WHERE snack_id = $1 RETURNING *;', [id]);
+        const response = await db.query('DELETE FROM events WHERE event_id = $1 RETURNING *;', [id]);
         if (response.rows.length != 1) {
-            throw new Error("Unable to delete snack.")
+            throw new Error("Unable to delete event.")
         }
-        return new Snack(response.rows[0]);
+        return new Event(response.rows[0]);
     }
 }
 
-module.exports = Snack;
+module.exports = Event;
