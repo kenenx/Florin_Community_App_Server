@@ -25,8 +25,6 @@ class Event {
             event_date,
             event_content} = data   
         const response = await db.query('INSERT INTO events (event_title, event_type, event_date, event_content) VALUES ($1, $2, $3, $4) RETURNING *;', [event_title, event_type, event_date, event_content]);
-        // const eventId = response.rows[0].event_id;
-        // const newevent = await Event.getOneById(eventId);
         return new Event(response.rows[0]);
     }
 
