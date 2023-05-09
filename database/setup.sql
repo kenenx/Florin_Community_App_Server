@@ -52,14 +52,15 @@ CREATE TABLE users (
     user_email VARCHAR(120) UNIQUE NOT NULL,
     comp_id INT,
     event_id INT,
-    bin_id INT REFERENCES binColl(bin_id) NOT NULL,
+    recy_id INT  REFERENCES recycling(recy_id),
+    bin_id INT REFERENCES binColl(bin_id),
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
     FOREIGN KEY (comp_id) REFERENCES complaints(comp_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 
-CREATE TABLE token (
+CREATE TABLE tokens (
     token_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT NOT NULL,
     token CHAR(36) UNIQUE NOT NULL,
