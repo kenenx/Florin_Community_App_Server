@@ -24,29 +24,6 @@ CREATE TABLE events (
     PRIMARY KEY (event_id)
 );
 
-CREATE TABLE recycling (
-    recy_id INT GENERATED ALWAYS AS IDENTITY,
-    recy_type VARCHAR (100) NOT NULL,
-    post_date DATE NOT NULL,
-    img VARCHAR(50),
-    info VARCHAR (500) NOT NULL,
-    PRIMARY KEY (recy_id)
-);
-
-CREATE TABLE users (
-    user_id INT GENERATED ALWAYS AS IDENTITY,
-    user_name VARCHAR(30) UNIQUE NOT NULL,
-    user_email VARCHAR(120) UNIQUE NOT NULL,
-    comp_id INT NOT NULL,
-    event_id INT NOT NULL,
-    recy_id INT NOT NULL,
-    password CHAR(60) NOT NULL,
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (comp_id) REFERENCES complaints("comp_id"),
-    FOREIGN KEY (recy_id) REFERENCES recycling("recy_id"),
-    FOREIGN KEY (event_id) REFERENCES events("event_id")
-);
-
 CREATE TABLE binColl (
     bin_id INT GENERATED ALWAYS AS IDENTITY,
     bin_coll VARCHAR (50) NOT NULL,
