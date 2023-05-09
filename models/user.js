@@ -2,8 +2,8 @@ const db = require('../database/connect');
 
 class User {
 
-  constructor({ id, user_name, password, is_admin }) {
-    this.id = id;
+  constructor({ user_id, user_name, password, is_admin }) {
+    this.id = user_id;
     this.username = user_name;
     this.password = password;
     this.isAdmin = is_admin;
@@ -28,7 +28,7 @@ class User {
   static async create({ username, password, idAdmin }) {
     console.log("model 29", username)
     console.log("model 29", password)
-    let response = await db.query("INSERT INTO users (user_name, password) VALUES ($1, $2) RETURNING id;",
+    let response = await db.query("INSERT INTO users (user_name, password) VALUES ($1, $2) RETURNING user_id;",
       [username, password]);
     const newId = response.rows[0].id;
     const newUser = await User.getOneById(newId);
