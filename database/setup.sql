@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS recycling CASCADE;
 DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS userEvents CASCADE;
 
 CREATE TABLE complaints (
     comp_id INT GENERATED ALWAYS AS IDENTITY,
@@ -54,6 +55,13 @@ CREATE TABLE token (
     FOREIGN KEY (user_id) REFERENCES users("user_id")
 );
 
+CREATE TABLE userEvents ( 
+    user_event_id INT GENERATED ALWAYS AS IDENTITY,
+    event_id INT NOT NULL,
+    PRIMARY KEY (user_event_id),
+    FOREIGN KEY (event_id) REFERENCES events("event_id")
+);
+
 
 -- event type 
 
@@ -73,4 +81,11 @@ INSERT INTO events
 VALUES
   ('kickboxing', 'mentoring', '2023-05-04', 'kickboxing lesson'),
   ('community cleanup', 'enviromental', '2023-05-08', 'picking up litter around the community');
+
+INSERT INTO userEvents
+  (event_id)
+  VALUES
+  ('1'),
+  ('2');
+
 
