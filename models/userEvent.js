@@ -18,8 +18,6 @@ class UserEvent {
     static async create(data) {
         const { event_id} = data   
         const response = await db.query('INSERT INTO userEvents (event_id) VALUES ($1) RETURNING *;', [event_id]);
-        // const eventId = response.rows[0].event_id;
-        // const newevent = await Event.getOneById(eventId);
         return new UserEvent(response.rows[0]);
     }
 
