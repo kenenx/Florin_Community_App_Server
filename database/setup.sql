@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS binColl CASCADE;
 CREATE TABLE complaints (
     comp_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
-    post_date VARCHAR (10) NOT NULL,
+    post_date DATE NOT NULL,
     content VARCHAR (500) NOT NULL,
     resolved BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (comp_id)
@@ -20,7 +20,7 @@ CREATE TABLE events (
     event_id INT GENERATED ALWAYS AS IDENTITY,
     event_title VARCHAR (100) NOT NULL,
     event_type VARCHAR(50) NOT NULL,
-    event_date VARCHAR (10) NOT NULL,
+    event_date DATE NOT NULL,
     event_content VARCHAR (500) NOT NULL,
     attendance INT DEFAULT 1,
     PRIMARY KEY (event_id)
@@ -39,7 +39,7 @@ CREATE TABLE recycling (
     recy_id INT GENERATED ALWAYS AS IDENTITY,
     recy_title VARCHAR (100) NOT NULL,
     recy_type VARCHAR (100) NOT NULL,
-    post_date VARCHAR (10) NOT NULL,
+    post_date DATE NOT NULL,
     bin_id INT,
     img VARCHAR(50),
     info VARCHAR (500) NOT NULL,
