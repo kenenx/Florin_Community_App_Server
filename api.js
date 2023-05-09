@@ -9,12 +9,23 @@ api.use(express.json());
 api.use(morgan('dev'));
 
 const eventsRouter = require('./routers/eventsRouter');
-const usersRouter = require('./routers/usersRouter')
 const complaintRouter = require('./routers/complaintRouter')
 const userEventsRouter = require('./routers/userEventsRouter')
+const recyclingRouter = require('./routers/recycleRouter');
+const userRouter = require('./routers/usersRouter');
+const profileRouter = require('./routers/usersRouter');
 
 
-api.use("/users", usersRouter);
+api.get("/", (req, res) => {
+    res.json({
+        name: "Community app",
+        description: "Welcome."
+    })
+})
+
+api.use("/users", userRouter);
+api.use("/profile",profileRouter);
+api.use("/recycling", recyclingRouter);
 api.use("/events", eventsRouter);
 api.use("/userevents", userEventsRouter);
 api.use('/complaints', complaintRouter);

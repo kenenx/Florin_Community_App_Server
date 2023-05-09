@@ -47,12 +47,47 @@ CREATE TABLE users (
     FOREIGN KEY (event_id) REFERENCES events("event_id")
 );
 
+CREATE TABLE binColl (
+    bin_id INT GENERATED ALWAYS AS IDENTITY,
+    bin_coll VARCHAR (50) NOT NULL,
+    PRIMARY KEY (bin_id)
+);
+
+INSERT INTO binColl (bin_coll) 
+VALUES ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
+
+CREATE TABLE recycling (
+    recy_id INT GENERATED ALWAYS AS IDENTITY,
+    recy_title VARCHAR (100) NOT NULL,
+    recy_type VARCHAR (100) NOT NULL,
+    post_date DATE NOT NULL,
+    bin_id INT,
+    img VARCHAR(50),
+    info VARCHAR (500) NOT NULL,
+    PRIMARY KEY (recy_id),
+    FOREIGN KEY (bin_id) REFERENCES binColl(bin_id)
+);
+
+
+CREATE TABLE users (
+    user_id INT GENERATED ALWAYS AS IDENTITY,
+    user_name VARCHAR(30) UNIQUE NOT NULL,
+    user_email VARCHAR(120) UNIQUE NOT NULL,
+    comp_id INT,
+    event_id INT,
+    bin_id INT REFERENCES binColl(bin_id) NOT NULL,
+    password CHAR(60) NOT NULL,
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (comp_id) REFERENCES complaints(comp_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id)
+);
+
 CREATE TABLE token (
     token_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT NOT NULL,
     token CHAR(36) UNIQUE NOT NULL,
     PRIMARY KEY (token_id),
-    FOREIGN KEY (user_id) REFERENCES users("user_id")
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE userEvents ( 
