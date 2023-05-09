@@ -7,6 +7,8 @@
 - npm run setup-db
 - npm run dev, app will run on port in .env file or 3000 if none is specified (http://localhost:[3000])
 
+## Deployed on https://florin-api.onrender.com/
+
 ## Endpoints
 - GET `/events`
 - GET `/events/:id`
