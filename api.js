@@ -1,16 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-//const logger = require('morgan')
+const express = require('express')
+const cors = require('cors')
+const morgan = require('morgan')
 
-const api = express();
-//const logRoutes = require('./middleware/logger');
+const api = express()
+
+api.use(cors());
+api.use(express.json());
+api.use(morgan('dev'));
+
+const eventsRouter = require('./routers/eventsRouter');
+const complaintRouter = require('./routers/complaintRouter')
+const userEventsRouter = require('./routers/userEventsRouter')
 const recyclingRouter = require('./routers/recycleRouter');
 const userRouter = require('./routers/usersRouter');
 const profileRouter = require('./routers/usersRouter');
 
-api.use(cors());
-api.use(express.json());
-//api.listen(logger('dev'))
 
 api.get("/", (req, res) => {
     res.json({
@@ -22,5 +26,8 @@ api.get("/", (req, res) => {
 api.use("/users", userRouter);
 api.use("/profile",profileRouter);
 api.use("/recycling", recyclingRouter);
+api.use("/events", eventsRouter);
+api.use("/userevents", userEventsRouter);
+api.use('/complaints', complaintRouter);
 
-module.exports = api;
+module.exports = api
