@@ -55,7 +55,6 @@ CREATE TABLE token (
 );
 
 
-
 -- event type 
 
 /* 
