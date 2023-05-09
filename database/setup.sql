@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS complaints;
+DROP TABLE IF EXISTS complaints;-
 DROP TABLE IF EXISTS recycling;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS token;
@@ -53,7 +53,6 @@ CREATE TABLE token (
     PRIMARY KEY (token_id),
     FOREIGN KEY (user_id) REFERENCES users("user_id")
 );
-
 
 
 -- event type 
