@@ -25,6 +25,7 @@ CREATE TABLE events (
     attendance INT DEFAULT 1,
     PRIMARY KEY (event_id)
 );
+
 CREATE TABLE binColl (
     bin_id INT GENERATED ALWAYS AS IDENTITY,
     bin_coll VARCHAR (50) NOT NULL,
