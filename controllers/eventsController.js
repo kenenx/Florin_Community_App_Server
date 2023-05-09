@@ -1,4 +1,4 @@
-const Event = require("../models/Event.js");
+const Event = require("../models/event.js");
 
 async function index (req, res) {
     try {

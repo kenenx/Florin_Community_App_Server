@@ -32,7 +32,7 @@ async function login(req, res) {
     if (!authenticated) {
       throw new Error("Incorrect credentials.");
     } else {
-      const token = await Token.create(user["id"])
+      const token = await Token.create(user["user_id"])
       res.status(200).json({ authenticated: true, token: token.token });
     }
 
@@ -41,6 +41,42 @@ async function login(req, res) {
   }
 }
 
-module.exports = {
-  register, login
-}
+///////////////////////////////////////////////////////////////////////
+//user profile
+///////////////////////////////////////////////////////////////////
+async function binDeets (req, res) {
+  try {
+      const userbin = await User.getbinColl();
+      res.json(userbin);
+  } catch (err) {
+      res.status(500).json({"error": err.message})
+  }
+};
+// async function eventDeets (req, res) {
+//   try {
+//       const userEvents = await User.getEventInfo();
+//       res.json(userEvents);
+//   } catch (err) {
+//       res.status(500).json({"error": err.message})
+//   }
+// };
+async function showComplaints (req, res) {
+  try {
+      //const id = parseInt(req.params.id);
+      const compposts = await User.getComplaintInfo();
+      res.json(compposts);
+  } catch (err) {
+      res.status(404).json({"error": err.message})
+  }
+};
+async function recyclingPosts (req, res) {
+  try {
+      //const id = parseInt(req.params.id);
+      const recyclepost = await User.getRecyclingPosts();
+      res.json(recyclepost);
+  } catch (err) {
+      res.status(404).json({"error": err.message})
+  }
+};
+
+module.exports = {register, login, binDeets,showComplaints,recyclingPosts}
