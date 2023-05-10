@@ -28,6 +28,18 @@ async function create (req, res) {
     }
 }
 
+// async function update(req, res) {
+//     try {
+//       const id = parseInt(req.params.id)
+//       const data = req.body
+//       const updateData = await UserEvent.getOneById(id)
+//       const result = await updateData.update(data)
+//       res.status(200).json(result)
+//     } catch (err) {
+//       res.status(404).json({ error: err.message })
+//     }
+//   }
+
 
 async function destroy (req, res) {
     try {
