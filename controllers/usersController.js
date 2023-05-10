@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const Token = require('../models/token')
 const Complaints = require('../models/complaints')
+
 async function show(req, res) {
   try {
     const id = parseInt(req.params.user_id)
@@ -83,6 +84,7 @@ async function showComplaints(req, res) {
     res.status(404).json({ error: err.message })
   }
 }
+
 async function recyclingPosts(req, res) {
   try {
     //const id = parseInt(req.params.id);
@@ -100,18 +102,25 @@ async function showToken(req, res) {
   } catch (err) {
     res.status(404).json({ error: err.message })
   }
+}
 
-};
-
-async function showEventsUser (req, res) {
+async function showEventsUser(req, res) {
   try {
-  const id = parseInt(req.params.user_id)
-  const userEvents = await User.getEventsUser(id);
-  res.json(userEvents);
+    const id = parseInt(req.params.user_id)
+    const userEvents = await User.getEventsUser(id)
+    res.json(userEvents)
   } catch (err) {
-  res.status(404).json({"error": err.message})
+    res.status(404).json({ error: err.message })
   }
-};
+}
 
-
-module.exports = {register, login, binDeets,showComplaints,recyclingPosts,show,showToken, showEventsUser }
+module.exports = {
+  register,
+  login,
+  binDeets,
+  showComplaints,
+  recyclingPosts,
+  show,
+  showToken,
+  showEventsUser,
+}
