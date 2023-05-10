@@ -31,7 +31,7 @@ CREATE TABLE recycling (
     recy_type VARCHAR (100) NOT NULL,
     post_date VARCHAR(10) NOT NULL,
     bin_id INT,
-    img VARCHAR(500),
+    img VARCHAR(255),
     info VARCHAR (500) NOT NULL,
     PRIMARY KEY (recy_id),
     FOREIGN KEY (bin_id) REFERENCES binColl(bin_id)
@@ -101,9 +101,9 @@ VALUES
 INSERT INTO users
   (user_name, user_email, password, bin_id)
 VALUES
-  ('nicole','nicole@lfa.com','$2b$10$8iH0KEalDAUWnV.68fWm/evTcbWYCK6C0DwMMv4HgVIF5zWVjYmSW','1'),
-  ('kenen','kenen@lfa.com','$2b$10$mwQMIKhtSt6dSnB4K/X1YucDSmXlaRv3k7pg4nv.13b2GUkgee1Jq','2'),
-  ('doheee','dohee@lfa.com','$2b$10$Qcfc41s6J0NabSFLBDSMYeav0KOwn/TuVbqmSBNyl9WJqb/jtdrZG','3');
+  ('nicole','nicole@lfa.com','pass','1'),
+  ('kenen','kenen@lfa.com','password','2'),
+  ('doheee','dohee@lfa.com','word','3');
 
 
 
