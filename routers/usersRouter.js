@@ -11,6 +11,7 @@ usersRouter.post("/login", usersController.login);
 
 //////////////////////////////
 //user profile
+//usersRouter.get("/profile", usersController)
 usersRouter.get("/complaints",authenticator,usersController.showComplaints);
 usersRouter.get("/profile/:user_id/bin",usersController.binDeets);
 usersRouter.get("/profile/:user_id",usersController.show);
