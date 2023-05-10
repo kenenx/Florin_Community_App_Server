@@ -41,7 +41,7 @@ CREATE TABLE recycling (
     recy_type VARCHAR (100) NOT NULL,
     post_date VARCHAR(10) NOT NULL,
     bin_id INT,
-    img VARCHAR(50),
+    img VARCHAR(255),
     info VARCHAR (500) NOT NULL,
     PRIMARY KEY (recy_id),
     FOREIGN KEY (bin_id) REFERENCES binColl(bin_id)

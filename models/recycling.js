@@ -63,7 +63,7 @@ class Recycle {
   async destroy() {
     let response = await db.query(
       'DELETE FROM recycling WHERE recy_id = $1 RETURNING *;',
-      [this.id]
+      [this.recy_id]
     )
     return new Recycle(response.rows[0])
   }
