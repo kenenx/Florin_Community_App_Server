@@ -100,13 +100,18 @@ async function showToken(req, res) {
   } catch (err) {
     res.status(404).json({ error: err.message })
   }
-}
-module.exports = {
-  register,
-  login,
-  binDeets,
-  showComplaints,
-  recyclingPosts,
-  show,
-  showToken,
-}
+
+};
+
+async function showEventsUser (req, res) {
+  try {
+  const id = parseInt(req.params.user_id)
+  const userEvents = await User.getEventsUser(id);
+  res.json(userEvents);
+  } catch (err) {
+  res.status(404).json({"error": err.message})
+  }
+};
+
+
+module.exports = {register, login, binDeets,showComplaints,recyclingPosts,show,showToken, showEventsUser }

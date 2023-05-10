@@ -102,6 +102,20 @@ class User {
     }
     return new User(response.rows[0])
   }
+
+
+  static async getEventsUser(id) {
+    const response = await db.query(
+      "SELECT users.user_id, users.user_name, events.* FROM users, events, userevents WHERE users.user_id = userevents.user_id AND events.event_id = userevents.event_id AND users.user_id = $1",
+    [id]);
+    [console.log(response.rows)]
+    if (response.rows.length < 1) {
+      throw new Error("Unable to locate user's events.");
+    }
+    return response.rows;
+  }
+
+
 }
 
 module.exports = User

@@ -63,6 +63,8 @@ class Event {
         }
         return new Event(response.rows[0]);
     }
+
+
 }
 
 module.exports = Event;
