@@ -45,17 +45,17 @@ class User {
   //joining user info with its bin collection days
   static async getbinColl(id) {
     const response = await db.query("SELECT binColl.bin_coll FROM users, binColl WHERE users.bin_id = binColl.bin_id AND users.user_id = $1",[id]);
-    console.log('res',response.rows[0])  //should print the bin collection day. 
+    //console.log('res',response.rows[0])  //should print the bin collection day. 
     if (response.rows.length != 1) {
       throw new Error("Unable to locate collection day.");
     }
-    const binColl = new User(response.rows[0]);
+    const binColl = response.rows[0];
     return binColl
   }
   /////////////////////////////////////////////////////////////////////////////
   //adding complaints 
   static async getComplaintInfo() {
-    const response = await db.query("SELECT users.user_name as user_name, complaints.title AS Complaints_title FROM users JOIN complaints ON users.comp_id = complaints.comp_id");
+    const response = await db.query("SELECT users.user_id as user_id, complaints.title AS Complaints_title FROM users JOIN complaints ON users.comp_id = complaints.comp_id");
     if (response.rows.length != 1) {
       throw new Error("Unable to locate complaints.");
     }
