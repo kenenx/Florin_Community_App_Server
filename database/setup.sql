@@ -4,17 +4,9 @@ DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS tokens CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS userEvents CASCADE;
+DROP TABLE IF EXISTS binColl CASCADE;
 
 
-CREATE TABLE complaints (
-    comp_id INT GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR (100) NOT NULL,
-    post_date DATE NOT NULL,
-    user_id INT REFERENCES users(user_id),
-    content VARCHAR (500) NOT NULL,
-    resolved BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (comp_id)
-);
 
 CREATE TABLE events (
     event_id INT GENERATED ALWAYS AS IDENTITY,
@@ -60,12 +52,6 @@ CREATE TABLE users (
     PRIMARY KEY (user_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
-INSERT INTO users
-  (user_name, user_email, password, bin_id)
-VALUES
-  ('nicole','nicole@lfa.com','pass','1'),
-  ('kenen','kenen@lfa.com','password','2'),
-  ('doheee','dohee@lfa.com','word','3');
 
 CREATE TABLE tokens (
     token_id INT GENERATED ALWAYS AS IDENTITY,
