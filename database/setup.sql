@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS userEvents CASCADE;
 DROP TABLE IF EXISTS binColl CASCADE;
 
 
-
 CREATE TABLE events (
     event_id INT GENERATED ALWAYS AS IDENTITY,
     event_title VARCHAR (100) NOT NULL,
@@ -46,7 +45,6 @@ CREATE TABLE users (
     user_email VARCHAR(120) UNIQUE NOT NULL,
     comp_id INT,
     event_id INT,
-    -- recy_id INT  REFERENCES recycling(recy_id),
     bin_id INT REFERENCES binColl(bin_id),
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
@@ -71,6 +69,7 @@ CREATE TABLE complaints (
     PRIMARY KEY (comp_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
 
 CREATE TABLE userEvents ( 
     user_event_id INT GENERATED ALWAYS AS IDENTITY,
@@ -109,17 +108,17 @@ VALUES
 
 
 
-INSERT INTO userEvents
-  (user_id, event_id)
-  VALUES
-  ('2','1'),
-  ('2','2'),
-  ('1','2');
+-- INSERT INTO userEvents
+--   (user_id, event_id)
+--   VALUES
+--   ('2','1'),
+--   ('2','2'),
+--   ('1','2');
 
-INSERT INTO tokens
-  (user_id, token)
-  VALUES
-  ('2','9d8a4b6e-ed83-4f90-8731-df9fcb384748');
+-- INSERT INTO tokens
+--   (user_id, token)
+--   VALUES
+--   ('2','9d8a4b6e-ed83-4f90-8731-df9fcb384748');
 
 
 
