@@ -71,9 +71,10 @@ class User {
   // }
   ////////////////////////////////////////////////////////////////////
   static async getUserfromToken() {
-    const userToken = localStorage.getItem("token")
+    const userToken = await db.query("SELECT token FROM tokens LIMIT 1")
+    const data = userToken.rows[0]
     const response = await db.query("SELECT tokens.user_id FROM users, tokens WHERE users.user_id = tokens.user_id AND tokens.token = $1",
-    [userToken]);
+    [data.token]);
     if (response.rows.length != 1) {
       throw new Error("Unable to locate token.");
     }
