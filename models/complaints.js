@@ -1,7 +1,7 @@
 const db = require('../database/connect')
 
 class Complaint {
-  constructor({ comp_id, title, post_date, content, resolved }) {
+  constructor({ comp_id, title, post_date, content, resolved, user_id }) {
     this.comp_id = comp_id
     this.title = title
     this.post_date = post_date
@@ -32,7 +32,7 @@ class Complaint {
   static async create(data) {
     let { title, post_date, content, resolved, user_id } = data
     const response = await db.query(
-      'INSERT INTO complaints ( title, post_date, content, resolved) VALUES ($1, $2, $3, $4, $5) RETURNING comp_id;',
+      'INSERT INTO complaints ( title, post_date, content, resolved, user_id ) VALUES ($1, $2, $3, $4, $5) RETURNING comp_id;',
 
       [title, post_date, content, resolved, user_id]
     )
@@ -64,6 +64,24 @@ class Complaint {
     }
     const deleteData = response.rows[0]
     return new Complaint(deleteData)
+  }
+
+  static async getComplaintInfo(id) {
+    const response = await db.query(
+      'SELECT complaints.post_date,complaints.title, complaints.content FROM complaints,users WHERE users.user_id = complaints.user_id AND users.user_id = $1',
+      [id]
+    )
+
+    const data = response.rows[0]
+    // console.log(response)
+    // const complaintInfo = await db.query(
+    //   'SELECT  title from complaints WHERE complaints.user_id = $1',
+    //   [data.user_id]
+    // )
+    if (response.rows.length != 1) {
+      throw new Error('Unable to locate complaints.')
+    }
+    return new Complaint(data)
   }
 }
 

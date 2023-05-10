@@ -34,17 +34,17 @@ class UserEvent {
         return new UserEvent(response.rows[0]);
     }
 
-    async update(data) {
-        let {event_id, user_id } = data
-        const response = await db.query(
-            'UPDATE userEvents SET event_id = $1, user_id = $2 WHERE user_event_id = $3 RETURNING *;' ,
-            [this.user_event_id, event_id, user_id]
-        ) 
-        if (response.rows.length !== 1) {
-            throw new Error('Unable to find the user events data.')
-        }
-        return response.rows[0]
-    }
+    // async update(data) {
+    //     let {event_id, user_id } = data
+    //     const response = await db.query(
+    //         'UPDATE userEvents SET event_id = $1, user_id = $2 WHERE user_event_id = $3 RETURNING *;' ,
+    //         [this.user_event_id, event_id, user_id]
+    //     ) 
+    //     if (response.rows.length !== 1) {
+    //         throw new Error('Unable to find the user events data.')
+    //     }
+    //     return response.rows[0]
+    // }
 
 
 

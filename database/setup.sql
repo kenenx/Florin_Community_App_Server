@@ -4,7 +4,17 @@ DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS tokens CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS userEvents CASCADE;
-DROP TABLE IF EXISTS binColl CASCADE;
+
+
+CREATE TABLE complaints (
+    comp_id INT GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR (100) NOT NULL,
+    post_date DATE NOT NULL,
+    user_id INT REFERENCES users(user_id),
+    content VARCHAR (500) NOT NULL,
+    resolved BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (comp_id)
+);
 
 CREATE TABLE events (
     event_id INT GENERATED ALWAYS AS IDENTITY,
@@ -31,7 +41,7 @@ CREATE TABLE recycling (
     recy_type VARCHAR (100) NOT NULL,
     post_date VARCHAR(10) NOT NULL,
     bin_id INT,
-    img VARCHAR(50),
+    img VARCHAR(255),
     info VARCHAR (500) NOT NULL,
     PRIMARY KEY (recy_id),
     FOREIGN KEY (bin_id) REFERENCES binColl(bin_id)
@@ -44,12 +54,18 @@ CREATE TABLE users (
     user_email VARCHAR(120) UNIQUE NOT NULL,
     comp_id INT,
     event_id INT,
-    recy_id INT  REFERENCES recycling(recy_id),
+    -- recy_id INT  REFERENCES recycling(recy_id),
     bin_id INT REFERENCES binColl(bin_id),
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
+INSERT INTO users
+  (user_name, user_email, password, bin_id)
+VALUES
+  ('nicole','nicole@lfa.com','pass','1'),
+  ('kenen','kenen@lfa.com','password','2'),
+  ('doheee','dohee@lfa.com','word','3');
 
 CREATE TABLE tokens (
     token_id INT GENERATED ALWAYS AS IDENTITY,
