@@ -71,7 +71,7 @@ class User {
   // }
   ////////////////////////////////////////////////////////////////////
   static async getUserfromToken() {
-    const userToken = await db.query("SELECT token FROM tokens LIMIT 1")
+    const userToken = await db.query("SELECT token FROM tokens ORDER BY token_id DESC LIMIT 1")
     const data = userToken.rows[0]
     const response = await db.query("SELECT tokens.user_id FROM users, tokens WHERE users.user_id = tokens.user_id AND tokens.token = $1",
     [data.token]);
