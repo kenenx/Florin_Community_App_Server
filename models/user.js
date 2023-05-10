@@ -53,11 +53,11 @@ class User {
       'SELECT binColl.bin_coll FROM users, binColl WHERE users.bin_id = binColl.bin_id AND users.user_id = $1',
       [id]
     )
-    console.log('res', response.rows[0]) //should print the bin collection day.
+    //console.log('res', response.rows[0]) //should print the bin collection day.
     if (response.rows.length != 1) {
       throw new Error('Unable to locate collection day.')
     }
-    const binColl = new User(response.rows[0])
+    const binColl = response.rows[0]
     return binColl
   }
   /////////////////////////////////////////////////////////////////////////////
@@ -87,6 +87,21 @@ class User {
   //   }
   //   return new User(response.rows[0]);
   // }
+  ////////////////////////////////////////////////////////////////////
+  static async getUserfromToken() {
+    const userToken = await db.query(
+      'SELECT token FROM tokens ORDER BY token_id DESC LIMIT 1'
+    )
+    const data = userToken.rows[0]
+    const response = await db.query(
+      'SELECT tokens.user_id FROM users, tokens WHERE users.user_id = tokens.user_id AND tokens.token = $1',
+      [data.token]
+    )
+    if (response.rows.length != 1) {
+      throw new Error('Unable to locate token.')
+    }
+    return new User(response.rows[0])
+  }
 }
 
 module.exports = User
