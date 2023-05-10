@@ -7,17 +7,6 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS userEvents CASCADE;
 DROP TABLE IF EXISTS binColl CASCADE;
 
-
-
-CREATE TABLE complaints (
-    comp_id INT GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR (100) NOT NULL,
-    post_date VARCHAR(10) NOT NULL,
-    content VARCHAR (500) NOT NULL,
-    resolved BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (comp_id)
-);
-
 CREATE TABLE events (
     event_id INT GENERATED ALWAYS AS IDENTITY,
     event_title VARCHAR (100) NOT NULL,
@@ -60,10 +49,8 @@ CREATE TABLE users (
     bin_id INT REFERENCES binColl(bin_id),
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id),
-    FOREIGN KEY (comp_id) REFERENCES complaints(comp_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
-
 
 CREATE TABLE tokens (
     token_id INT GENERATED ALWAYS AS IDENTITY,
@@ -73,13 +60,25 @@ CREATE TABLE tokens (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE userEvents ( 
-    user_event_id INT GENERATED ALWAYS AS IDENTITY,
-    event_id INT NOT NULL,
-    PRIMARY KEY (user_event_id),
-    FOREIGN KEY (event_id) REFERENCES events("event_id")
+CREATE TABLE complaints (
+    comp_id INT GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR (100) NOT NULL,
+    post_date VARCHAR(10) NOT NULL,
+    content VARCHAR (500) NOT NULL,
+    resolved BOOLEAN DEFAULT FALSE,
+    user_id INT NOT NULL,
+    PRIMARY KEY (comp_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE userEvents ( 
+    user_event_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    event_id INT NOT NULL,
+    PRIMARY KEY (user_event_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id)
+);
 
 -- event type 
 
@@ -100,10 +99,19 @@ VALUES
   ('kickboxing', 'mentoring', '2023-05-04', 'kickboxing lesson'),
   ('community cleanup', 'enviromental', '2023-05-08', 'picking up litter around the community');
 
+INSERT INTO users
+  (user_name, user_email, password)
+VALUES
+  ('nicole','nicole@lfa.com','pass'),
+  ('kenen','kenen@lfa.com','password'),
+  ('doheee','dohee@lfa.com','word');
+
+
+
 INSERT INTO userEvents
-  (event_id)
+  (user_id, event_id)
   VALUES
-  ('1'),
-  ('2');
+  ('2','1'),
+  ('1','2');
 
 
