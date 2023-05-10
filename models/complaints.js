@@ -65,6 +65,24 @@ class Complaint {
     const deleteData = response.rows[0]
     return new Complaint(deleteData)
   }
+
+  static async getComplaintInfo(id) {
+    const response = await db.query(
+      'SELECT complaints.post_date,complaints.title, complaints.content FROM complaints,users WHERE users.user_id = complaints.user_id AND users.user_id = $1',
+      [id]
+    )
+
+    const data = response.rows[0]
+    // console.log(response)
+    // const complaintInfo = await db.query(
+    //   'SELECT  title from complaints WHERE complaints.user_id = $1',
+    //   [data.user_id]
+    // )
+    if (response.rows.length != 1) {
+      throw new Error('Unable to locate complaints.')
+    }
+    return new Complaint(data)
+  }
 }
 
 module.exports = Complaint
