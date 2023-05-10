@@ -100,11 +100,11 @@ VALUES
   ('community cleanup', 'enviromental', '2023-05-08', 'picking up litter around the community');
 
 INSERT INTO users
-  (user_name, user_email, password)
+  (user_name, user_email, password, bin_id)
 VALUES
-  ('nicole','nicole@lfa.com','pass'),
-  ('kenen','kenen@lfa.com','password'),
-  ('doheee','dohee@lfa.com','word');
+  ('nicole','nicole@lfa.com','pass','1'),
+  ('kenen','kenen@lfa.com','password','2'),
+  ('doheee','dohee@lfa.com','word','3');
 
 
 
