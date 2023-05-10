@@ -13,7 +13,7 @@ const complaintRouter = require('./routers/complaintRouter')
 const userEventsRouter = require('./routers/userEventsRouter')
 const recyclingRouter = require('./routers/recycleRouter');
 const userRouter = require('./routers/usersRouter');
-const profileRouter = require('./routers/usersRouter');
+//const profileRouter = require('./routers/usersRouter');
 
 
 api.get("/", (req, res) => {
@@ -24,7 +24,7 @@ api.get("/", (req, res) => {
 })
 
 api.use("/users", userRouter);
-api.use("/profile",profileRouter);
+//api.use("/profile",profileRouter);
 api.use("/recycling", recyclingRouter);
 api.use("/events", eventsRouter);
 api.use("/userevents", userEventsRouter);

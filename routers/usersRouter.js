@@ -11,10 +11,12 @@ usersRouter.post("/login", usersController.login);
 
 //////////////////////////////
 //user profile
-profileRouter.get("/bin",authenticator,usersController.binDeets);
-//profileRouter.get("/events",usersController.eventDeets);
-profileRouter.get("/complaints",authenticator,usersController.showComplaints);
-profileRouter.get("/recycling",authenticator,usersController.recyclingPosts);
+usersRouter.get("/complaints",authenticator,usersController.showComplaints);
+usersRouter.get("/profile/:user_id/bin",usersController.binDeets);
+usersRouter.get("/profile/:user_id",usersController.show);
+
+//profileRouter.get("/profile/events",usersController.eventDeets);
+//usersRouter.get("/recycling",authenticator,usersController.recyclingPosts);
 
 
-module.exports = usersRouter, profileRouter;
+module.exports = usersRouter;
