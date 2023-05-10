@@ -2,6 +2,16 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Token = require('../models/token');
 
+async function show (req, res) {
+  try {
+      const id = parseInt(req.params.user_id);
+      const profile = await User.getOneById(id);
+      res.json(profile);
+  } catch (err) {
+      return res.status(404).json({"error": err.message})
+  }
+};
+
 async function register(req, res) {
   try {
     const data = req.body;
@@ -47,22 +57,16 @@ async function login(req, res) {
 async function binDeets (req, res) {
   try {
       const id = parseInt(req.params.user_id);
+      console.log('id',id)
       const userbin = await User.getbinColl(id);
+      console.log('binnnn',userbin)
       res.json(userbin);
-      console.log(userbin)
+      
   } catch (err) {
-      res.status(500).json({"error": err.message})
+      return res.status(500).json({"error": err.message})
   }
 };
-async function show (req, res) {
-  try {
-      const id = parseInt(req.params.user_id);
-      const profile = await User.getOneById(id);
-      res.json(profile);
-  } catch (err) {
-      res.status(404).json({"error": err.message})
-  }
-};
+
 
 // async function eventDeets (req, res) {
 //   try {

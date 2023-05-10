@@ -11,6 +11,7 @@ CREATE TABLE complaints (
     comp_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
     post_date DATE NOT NULL,
+    user_id INT REFERENCES users(user_id),
     content VARCHAR (500) NOT NULL,
     resolved BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (comp_id)
@@ -77,7 +78,6 @@ CREATE TABLE userEvents (
     PRIMARY KEY (user_event_id),
     FOREIGN KEY (event_id) REFERENCES events("event_id")
 );
-
 
 -- event type 
 
