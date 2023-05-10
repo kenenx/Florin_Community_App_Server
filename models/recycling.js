@@ -12,12 +12,12 @@ class Recycle {
     info,
   }) {
     this.recy_id = recy_id
-    this.recy_title = recy_title
-    ;(this.recy_type = recy_type),
+    ;(this.recy_title = recy_title),
+      (this.recy_type = recy_type),
       (this.bin_coll = bin_coll),
       (this.post_date = post_date),
-      (this.img = img)
-    this.info = info
+      (this.img = img),
+      (this.info = info)
   }
 
   static async getAll() {

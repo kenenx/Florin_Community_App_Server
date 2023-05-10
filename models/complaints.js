@@ -1,7 +1,7 @@
 const db = require('../database/connect')
 
 class Complaint {
-  constructor({ comp_id, title, post_date, content, resolved }) {
+  constructor({ comp_id, title, post_date, content, resolved, user_id }) {
     this.comp_id = comp_id
     this.title = title
     this.post_date = post_date
@@ -32,7 +32,7 @@ class Complaint {
   static async create(data) {
     let { title, post_date, content, resolved, user_id } = data
     const response = await db.query(
-      'INSERT INTO complaints ( title, post_date, content, resolved) VALUES ($1, $2, $3, $4, $5) RETURNING comp_id;',
+      'INSERT INTO complaints ( title, post_date, content, resolved, user_id ) VALUES ($1, $2, $3, $4, $5) RETURNING comp_id;',
 
       [title, post_date, content, resolved, user_id]
     )
