@@ -113,4 +113,10 @@ INSERT INTO userEvents
   ('2','1'),
   ('1','2');
 
+INSERT INTO tokens
+  (user_id, token)
+  VALUES
+  ('2','9d8a4b6e-ed83-4f90-8731-df9fcb384748');
+
+
 
