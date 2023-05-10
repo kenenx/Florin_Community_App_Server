@@ -111,6 +111,7 @@ INSERT INTO userEvents
   (user_id, event_id)
   VALUES
   ('2','1'),
+  ('2','2'),
   ('1','2');
 
 INSERT INTO tokens
