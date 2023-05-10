@@ -14,6 +14,7 @@ usersRouter.post("/login", usersController.login);
 usersRouter.get("/complaints",authenticator,usersController.showComplaints);
 usersRouter.get("/profile/:user_id/bin",usersController.binDeets);
 usersRouter.get("/profile/:user_id",usersController.show);
+usersRouter.get("/profile", usersController.showToken);
 
 //profileRouter.get("/profile/events",usersController.eventDeets);
 //usersRouter.get("/recycling",authenticator,usersController.recyclingPosts);

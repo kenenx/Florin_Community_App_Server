@@ -69,6 +69,17 @@ class User {
   //   }
   //   return new User(response.rows[0]);
   // }
+  ////////////////////////////////////////////////////////////////////
+  static async getUserfromToken() {
+    const userToken = localStorage.getItem("token")
+    const response = await db.query("SELECT tokens.user_id FROM users, tokens WHERE users.user_id = tokens.user_id AND tokens.token = $1",
+    [userToken]);
+    if (response.rows.length != 1) {
+      throw new Error("Unable to locate token.");
+    }
+    return new User(response.rows[0]);
+  }
+
 }
 
 module.exports = User;

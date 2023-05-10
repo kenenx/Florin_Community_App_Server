@@ -95,4 +95,12 @@ async function recyclingPosts (req, res) {
   }
 };
 
-module.exports = {register, login, binDeets,showComplaints,recyclingPosts,show}
+async function showToken (req, res) {
+  try {
+    const userToken = await User.getUserfromToken();
+    res.json(userToken);
+  } catch (err) {
+    res.status(404).json({"error": err.message})
+  }
+};
+module.exports = {register, login, binDeets,showComplaints,recyclingPosts,show,showToken}
