@@ -12,7 +12,8 @@ class Event {
     }
 
     static async getAll() {
-        const response = await db.query("SELECT * FROM events ORDER BY event_date ");
+        const response = await db.query(
+            "SELECT * FROM events ORDER BY event_date ");
         if (response.rows.length === 0) {
             throw new Error("No event available.")
         }
@@ -24,12 +25,14 @@ class Event {
             event_type,
             event_date,
             event_content} = data   
-        const response = await db.query('INSERT INTO events (event_title, event_type, event_date, event_content) VALUES ($1, $2, $3, $4) RETURNING *;', [event_title, event_type, event_date, event_content]);
+        const response = await db.query(
+            'INSERT INTO events (event_title, event_type, event_date, event_content) VALUES ($1, $2, $3, $4) RETURNING *;', [event_title, event_type, event_date, event_content]);
         return new Event(response.rows[0]);
     }
 
     static async getOneById(id) {
-        const response = await db.query("SELECT * FROM events WHERE event_id = $1;",[id]) ;
+        const response = await db.query(
+            "SELECT * FROM events WHERE event_id = $1;",[id]) ;
         if (response.rows.length != 1) {
             throw new Error("Unable to locate event.")
         }
@@ -43,17 +46,18 @@ class Event {
             event_date,
             event_content,
             attendance} = data
-        const response = await db.query("UPDATE events SET event_title = $2, event_type = $3, event_date = $4, event_content = $5, attendance = $6 WHERE event_id = $1 RETURNING *;",
+        const response = await db.query(
+            "UPDATE events SET event_title = $2, event_type = $3, event_date = $4, event_content = $5, attendance = $6 WHERE event_id = $1 RETURNING *;",
         [this.id, event_title, event_type, event_date, event_content, attendance]);
         if (response.rows.length !== 1) {
             throw new Error("Unable to update event.")
         }
-        const updateData = response.rows[0]
-        return updateData;
+        return response.rows[0];
     }
 
     static async destroy(id) {
-        const response = await db.query('DELETE FROM events WHERE event_id = $1 RETURNING *;', [id]);
+        const response = await db.query(
+            'DELETE FROM events WHERE event_id = $1 RETURNING *;', [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to delete event.")
         }

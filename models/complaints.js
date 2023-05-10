@@ -7,6 +7,7 @@ class Complaint {
     this.post_date = post_date
     this.content = content
     this.resolved = resolved
+    this.user_id = user_id
   }
 
   static async getAll() {
@@ -29,15 +30,15 @@ class Complaint {
   }
 
   static async create(data) {
-    let { title, post_date, content, resolved } = data
+    let { title, post_date, content, resolved, user_id } = data
     const response = await db.query(
-      'INSERT INTO complaints ( title, post_date, content, resolved) VALUES ($1, $2, $3, $4) RETURNING comp_id;',
+      'INSERT INTO complaints ( title, post_date, content, resolved) VALUES ($1, $2, $3, $4, $5) RETURNING comp_id;',
 
-      [title, post_date, content, resolved]
+      [title, post_date, content, resolved, user_id]
     )
     const complaintId = response.rows[0].comp_id
-    const newSnack = await Complaint.getOneById(complaintId)
-    return newSnack
+    const newComplaint = await Complaint.getOneById(complaintId)
+    return newComplaint
   }
 
   async update(data) {
