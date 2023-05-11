@@ -20,7 +20,7 @@ class Complaint {
 
   static async getOneById(id) {
     const response = await db.query(
-      'SELECT * FROM complaints WHERE comp_id = $1;',
+      'SELECT * FROM complaints WHERE user_id = $1;',
       [id]
     )
     if (response.rows.length !== 1) {
