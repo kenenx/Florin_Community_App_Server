@@ -50,10 +50,10 @@ class Recycle {
   }
 
   static async create(data) {
-    const { recy_title, recy_type, post_date, info, img } = data
+    const { title, recy_type, post_date, info, img } = data
     let response = await db.query(
-      'INSERT INTO recycling (recy_title,recy_type, post_date, info, img) VALUES ($1, $2, $3, $4, $5) RETURNING*;',
-      [recy_title, recy_type, post_date, info, img]
+      'INSERT INTO recycling (recy_title,recy_type, post_date, info, img) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
+      [title, recy_type, post_date, info, img]
     )
     const newId = response.rows[0].recy_id
     const newRecycle = await Recycle.getOneById(newId)
