@@ -15,3 +15,10 @@
 - POST `/events`
 - PATCH `/events/:id`
 - DELETE `/events/:id`
+
+## testing server side
+### set up
+- run npm init
+- run npm install
+- make sure you have a `.env` with the db_url 
+- make sure there is data stored in the database before testing
