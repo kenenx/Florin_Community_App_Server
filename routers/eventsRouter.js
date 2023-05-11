@@ -12,4 +12,4 @@ eventsRouter.delete("/:id", eventsController.destroy);
 module.exports = eventsRouter;
 
 // DB_URL=postgres://fimpwymu:audfwt_xOEKjYgkUWvT-fYjvxabYrY-f@horton.db.elephantsql.com/fimpwymu
-// port=8080
+// PORT = 3000
