@@ -96,8 +96,9 @@ CREATE TABLE userEvents (
 INSERT INTO events
   (event_title, event_type, event_date, event_content)
 VALUES
-  ('kickboxing', 'mentoring', '2023-05-04', 'kickboxing lesson'),
-  ('community cleanup', 'enviromental', '2023-05-08', 'picking up litter around the community');
+  ('Kickboxing', 'mentoring', '2023-05-10', 'Kickboxing lesson'),
+  ('Community cleanup', 'enviromental', '2023-05-19', 'Picking up litter around the community');
+  ('Community hike', 'exploration', '2023-05-20', 'Hike around the sites of legendary historical events')
 
 INSERT INTO users
   (user_name, user_email, password, bin_id)
