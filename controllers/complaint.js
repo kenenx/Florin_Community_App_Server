@@ -12,7 +12,7 @@ async function index(req, res) {
 async function show(req, res) {
   try {
     const id = parseInt(req.params.id)
-    const complain = await Complaint.getOneById(id)
+    const complain = await Complaint.getAll(id)
     res.status(200).json(complain)
   } catch (err) {
     res.status(404).json({ error: err.message })

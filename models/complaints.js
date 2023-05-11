@@ -26,7 +26,7 @@ class Complaint {
     if (response.rows.length !== 1) {
       throw new Error('Unable to  find the complaints data.')
     }
-    return new Complaint(response.rows[0])
+    return new Complaint(response.rows)
   }
 
   static async create(data) {
