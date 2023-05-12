@@ -97,8 +97,8 @@ INSERT INTO events
   (event_title, event_type, event_date, event_content)
 VALUES
   ('Kickboxing', 'mentoring', '2023-05-10', 'Kickboxing lesson'),
-  ('Community cleanup', 'enviromental', '2023-05-19', 'Picking up litter around the community');
-  ('Community hike', 'exploration', '2023-05-20', 'Hike around the sites of legendary historical events')
+  ('Community cleanup', 'enviromental', '2023-05-19', 'Picking up litter around the community'),
+  ('Community hike', 'exploration', '2023-05-20', 'Hike around the sites of legendary historical events');
 
 INSERT INTO users
   (user_name, user_email, password, bin_id)
@@ -106,7 +106,6 @@ VALUES
   ('nicole','nicole@lfa.com','$2b$10$8iH0KEalDAUWnV.68fWm/evTcbWYCK6C0DwMMv4HgVIF5zWVjYmSW','1'),
   ('kenen','kenen@lfa.com','$2b$10$mwQMIKhtSt6dSnB4K/X1YucDSmXlaRv3k7pg4nv.13b2GUkgee1Jq','2'),
   ('doheee','dohee@lfa.com','$2b$10$Qcfc41s6J0NabSFLBDSMYeav0KOwn/TuVbqmSBNyl9WJqb/jtdrZG','3');
-
 
 
 -- INSERT INTO userEvents
